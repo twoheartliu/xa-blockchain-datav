@@ -1,56 +1,44 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
-import { ScrollRankingBoard } from '@jiaminghi/data-view-react'
+import { ScrollBoard } from '@jiaminghi/data-view-react'
 
 import './RankingBoard.less'
 
-const config = {
-  data: [
-    {
-      name: '日常养护',
-      value: 55,
-    },
-    {
-      name: '交通事故',
-      value: 120,
-    },
-    {
-      name: '路面',
-      value: 78,
-    },
-    {
-      name: '桥通',
-      value: 66,
-    },
-    {
-      name: '计日工',
-      value: 80,
-    },
-    {
-      name: '路基',
-      value: 45,
-    },
-    {
-      name: '交安设施',
-      value: 29,
-    },
-    {
-      name: '除雪',
-      value: 29,
-    },
-    {
-      name: '绿化',
-      value: 29,
-    },
-  ],
-  rowNum: 9,
+const getConfig = settings => {
+  return {
+    ...settings,
+    // header: ['日期', '城市节点', '流量总计'],
+    // data: [
+    //   ['行1列1', '行1列2', '行1列3'],
+    //   ['行2列1', '行2列2', '行2列3'],
+    //   ['行3列1', '行3列2', '行3列3'],
+    //   ['行4列1', '行4列2', '行4列3'],
+    //   ['行5列1', '行5列2', '行5列3'],
+    //   ['行6列1', '行6列2', '行6列3'],
+    //   ['行7列1', '行7列2', '行7列3'],
+    //   ['行8列1', '行8列2', '行8列3'],
+    //   ['行9列1', '行9列2', '行9列3'],
+    //   ['行10列1', '行10列2', '行10列3'],
+    // ],
+    // index: true,
+    columnWidth: [150, 200, 100],
+    align: ['center'],
+    rowNum: 10,
+    headerBGC: '#1981f6',
+    headerHeight: 45,
+  }
 }
 
-export default () => {
+export default props => {
+  const [config, setConfig] = useState({})
+  useEffect(() => {
+    setConfig(getConfig(props.settings))
+  }, [props.settings])
+
   return (
     <div id="ranking-board">
-      <div className="ranking-board-title">巡查上报记录数量</div>
-      <ScrollRankingBoard config={config} />
+      <div className="ranking-board-title">记账节点流量使用情况</div>
+      <ScrollBoard config={config} />
     </div>
   )
 }

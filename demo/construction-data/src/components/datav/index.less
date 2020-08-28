@@ -33,10 +33,35 @@
   }
 
   .block-top-content {
-    height: 55%;
+    height: 45%;
     display: flex;
     flex-grow: 0;
     box-sizing: border-box;
     padding-bottom: 20px;
+  }
+
+  .top-right-cmp {
+    display: flex;
+    flex: 1;
+  }
+
+  .img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: flex-end;
+    &.full {
+      bottom: 0;
+      left: 0;
+      // border: 10px solid red;p
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 0;
+    }
+    img {
+      width: 50px;
+      height: 50px;
+    }
   }
 }

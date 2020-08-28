@@ -17,16 +17,8 @@ export default props => {
       <Decoration5 className="header-center-decoration" />
       <Decoration8 className="header-right-decoration" reverse={true} />
       <div className="center-title">
-        {props.settings.title}
+        {props.title}
         <span>雄安区块链浏览器大屏</span>
-      </div>
-      <div className="select">
-        <label htmlFor="subject">选择项目</label>
-        <select name="subject" id="subject" value={value} onChange={selectOnchange}>
-          <option value="01">工程监理项目</option>
-          <option value="02">招采项目</option>
-          <option value="03">全域旅游项目</option>
-        </select>
       </div>
     </div>
   )

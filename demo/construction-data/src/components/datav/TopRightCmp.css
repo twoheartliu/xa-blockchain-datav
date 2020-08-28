@@ -1,0 +1,28 @@
+.charts {
+  width: 50%;
+  height: 100%;
+  background-color: rgba(6, 30, 93, 0.5);
+  border-top: 2px solid rgba(1, 153, 209, 0.5);
+  box-sizing: border-box;
+  margin-right: 10px;
+}
+.charts .charts-title {
+  height: 50px;
+  font-weight: bold;
+  text-indent: 20px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+.charts .top-right-cmp {
+  position: relative;
+  padding: 0 50px;
+  box-sizing: border-box;
+}
+.charts .top-right-cmp .chart-name {
+  position: absolute;
+  right: 70px;
+  text-align: right;
+  font-size: 20px;
+  top: 10px;
+}

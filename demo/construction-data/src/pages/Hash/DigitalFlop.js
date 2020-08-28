@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react'
 
 import { DigitalFlop, Decoration10 } from '@jiaminghi/data-view-react'
 
-import './DigitalFlop.less'
+import './Flop.less'
+// import './DigitalFlop.less'
 
 function getData(data) {
   return [
     {
       title: '最新出块时间',
       number: {
-        // number: [data.time],
-        content: data.time,
+        number: [],
+        content: '2020-08-15',
         textAlign: 'center',
         style: {
           fill: '#4d99fc',
@@ -31,7 +32,7 @@ function getData(data) {
           fontWeight: 'bold',
         },
       },
-      // unit: '个',
+      unit: '',
     },
     {
       title: '最新区块数量',
@@ -44,7 +45,7 @@ function getData(data) {
           fontWeight: 'bold',
         },
       },
-      // unit: 's',
+      unit: '',
     },
     {
       title: '总交易数',
@@ -57,7 +58,7 @@ function getData(data) {
           fontWeight: 'bold',
         },
       },
-      // unit: '个',
+      unit: '',
     },
     {
       title: '最新区块交易数量',
@@ -70,7 +71,7 @@ function getData(data) {
           fontWeight: 'bold',
         },
       },
-      // unit: '个',
+      unit: '',
     },
     {
       title: '区块高度',
@@ -81,6 +82,7 @@ function getData(data) {
         style: {
           fill: '#4d99fc',
           fontWeight: 'bold',
+          fontSize: '30',
         },
       },
       unit: '',
@@ -99,23 +101,23 @@ function randomExtend(minNum, maxNum) {
 export default props => {
   const [digitalFlopData, setData] = useState([])
   useEffect(() => {
-    setData(getData(props.settings))
+    setData(getData(props.num))
     // const timer = setInterval(createData, 30000)
 
     // return () => clearInterval(timer)
-  }, [props.settings])
+  }, [props.num])
 
   // function createData() {
   //   setData(getData())
   // }
 
   return (
-    <div id="digital-flop">
+    <div id="flop">
       {digitalFlopData.map(item => (
         <div className="digital-flop-item" key={item.title}>
           <div className="digital-flop-title">{item.title}</div>
           <div className="digital-flop">
-            <DigitalFlop config={item.number} style={{ width: '100px', height: '50px' }} />
+            <DigitalFlop config={item.number} />
             <div className="unit">{item.unit}</div>
           </div>
         </div>
