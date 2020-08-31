@@ -140,10 +140,6 @@ export default () => {
             <table>
               <tbody>
                 <tr>
-                  <td>区块高度</td>
-                  <td>216023</td>
-                </tr>
-                <tr>
                   <td>出块时间</td>
                   <td>{dayjs(data.timeSpanSec).format('YYYY-MM-DD hh:mm:ss')}</td>
                 </tr>
