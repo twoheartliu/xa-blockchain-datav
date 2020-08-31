@@ -1,10 +1,9 @@
 import React from 'react'
 import Hash from './pages/Hash'
 import Home from './pages/Home'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import './App.css'
-import NotFound from './pages/NotFound'
 
 function App() {
   return (
@@ -20,7 +19,7 @@ function App() {
               <Home />
             </Route>
             <Route path="*">
-              <NotFound />
+              <Redirect to={'/'} />
             </Route>
           </Switch>
         </div>

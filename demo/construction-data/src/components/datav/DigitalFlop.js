@@ -21,9 +21,9 @@ function getData(data) {
       unit: '',
     },
     {
-      title: '最新Epoch',
+      title: '最新区块数',
       number: {
-        number: [data.epoch],
+        number: [data.blockNum],
         content: '{nt}',
         textAlign: 'center',
         style: {
@@ -34,9 +34,9 @@ function getData(data) {
       // unit: '个',
     },
     {
-      title: '最新区块数量',
+      title: '最新交易数',
       number: {
-        number: [data.blockNum],
+        number: [data.tradeNum],
         content: '{nt}',
         textAlign: 'center',
         style: {
@@ -47,9 +47,9 @@ function getData(data) {
       // unit: 's',
     },
     {
-      title: '总交易数',
+      title: '记账节点数',
       number: {
-        number: [randomExtend(5, 10)],
+        number: [data.nodes],
         content: '{nt}',
         textAlign: 'center',
         style: {
@@ -60,30 +60,17 @@ function getData(data) {
       // unit: '个',
     },
     {
-      title: '最新区块交易数量',
+      title: '链码数',
       number: {
-        number: [data.tradeNum],
+        number: [data.codeNum],
         content: '{nt}',
         textAlign: 'center',
         style: {
-          fill: '#40faee',
+          fill: '#f47827',
           fontWeight: 'bold',
         },
       },
       // unit: '个',
-    },
-    {
-      title: '区块高度',
-      number: {
-        number: [randomExtend(5, 10)],
-        content: '{nt}',
-        textAlign: 'center',
-        style: {
-          fill: '#4d99fc',
-          fontWeight: 'bold',
-        },
-      },
-      unit: '',
     },
   ]
 }

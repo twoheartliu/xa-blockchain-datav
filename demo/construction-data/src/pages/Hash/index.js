@@ -3,19 +3,30 @@ import { FullScreenContainer, BorderBox13, BorderBox2 } from '@jiaminghi/data-vi
 import '../../components/datav/index.less'
 import './index.less'
 import { useParams, useHistory } from 'react-router-dom'
-import TopHeader from './TopHeader'
-import DigitalFlop from './DigitalFlop'
+import TopHeader from '../../components/datav/TopHeader'
+import DigitalFlop from '../../components/datav/DigitalFlop'
 import qs from 'qs'
+import dayjs from 'dayjs'
 
 export default () => {
   const { hash, project } = useParams()
-  const [title, setTitle] = useState(null)
-  const [data, setData] = useState({})
-  const [num, setNum] = useState({
-    time: 0,
-    epoch: 0,
-    blockNum: 0,
-    tradeNum: 0,
+  const [data, setData] = useState({
+    timeSpanSec: null,
+    createName: null,
+    blockNumber: null,
+    blockHash: null,
+    dataHash: null,
+    txId: null,
+  })
+  const [settings, setSettings] = useState({
+    TopHeader: {},
+    DigitalFlop: {
+      time: `${dayjs().format('YYYY-MM-DD')}`,
+      blockNum: null,
+      tradeNum: null,
+      nodes: null,
+      codeNum: null,
+    },
   })
   // supervision, recruit, travel
 
@@ -27,40 +38,53 @@ export default () => {
   // },
   let history = useHistory()
   useEffect(() => {
-    if (project === 'supervision') {
-      setTitle('工程监理项目')
-      setNum({
-        time: 100,
-        epoch: 10,
-        blockNum: 21638,
-        tradeNum: 10,
-      })
-    } else if (project === 'recruit') {
-      setTitle('招采项目')
-      setNum({
-        time: '2020-02-20',
-        epoch: 10,
-        blockNum: 21638,
-        tradeNum: 10,
-      })
-    } else if (project === 'travel') {
-      setTitle('全域旅游项目')
-      setNum({
-        time: 10,
-        epoch: 10,
-        blockNum: 21638,
-        tradeNum: 10,
-      })
-    } else {
-      setTitle('')
-      setNum({
-        time: 10,
-        epoch: 0,
-        blockNum: 0,
-        tradeNum: 0,
-      })
+    switch (project) {
+      case 'supervision':
+        setSettings({
+          TopHeader: {
+            title: '工程监理项目',
+          },
+          DigitalFlop: {
+            time: `${dayjs().format('YYYY-MM-DD')}`,
+            blockNum: 82124,
+            tradeNum: 217556,
+            nodes: 3,
+            codeNum: 1,
+          },
+        })
+        break
+      case 'bidding':
+        setSettings({
+          TopHeader: {
+            title: '招采项目',
+          },
+          DigitalFlop: {
+            time: `${dayjs().format('YYYY-MM-DD')}`,
+            blockNum: 77,
+            tradeNum: 111,
+            nodes: 3,
+            codeNum: 1,
+          },
+        })
+        break
+      case 'travel':
+        setSettings({
+          TopHeader: {
+            title: '全域旅游项目',
+          },
+          DigitalFlop: {
+            time: `${dayjs().format('YYYY-MM-DD')}`,
+            blockNum: 82124,
+            tradeNum: 217556,
+            nodes: 3,
+            codeNum: 1,
+          },
+        })
+        break
+      default:
+        break
     }
-  }, [])
+  }, [project])
 
   const style2 = {
     width: '120px',
@@ -79,7 +103,7 @@ export default () => {
   useEffect(() => {
     console.log(hash)
     const params = qs.stringify({ chainTxId: hash })
-    fetch(`/api/tx?${params}`, {
+    fetch(`/api/query/${project}/tx?${params}`, {
       method: 'GET',
       mode: 'cors',
     })
@@ -93,40 +117,19 @@ export default () => {
           if (result.info) {
             setData(result.info)
           }
-          // if (result.status.code === '000000') {
-          //   setData(result.body)
-          // }
         },
         error => {
           throw error
         }
       )
-  }, [])
-
-  function timestampToTime(timestamp) {
-    var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000
-
-    var Y = date.getFullYear() + '-'
-
-    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
-
-    var D = date.getDate() + ' '
-
-    var h = date.getHours() + ':'
-
-    var m = date.getMinutes() + ':'
-
-    var s = date.getSeconds()
-
-    return Y + M + D + h + m + s
-  }
+  }, [hash])
 
   return (
     <div id="data-view" className="hash">
       <FullScreenContainer>
-        <TopHeader title={title} />
+        <TopHeader settings={settings.TopHeader} />
         {/* <div className="main-content"> */}
-        <DigitalFlop num={num} />
+        <DigitalFlop settings={settings.DigitalFlop} />
         {/* </div> */}
         <BorderBox13>
           <BorderBox2 style={style2} className="backButton">
@@ -141,8 +144,8 @@ export default () => {
                   <td>216023</td>
                 </tr>
                 <tr>
-                  <td>出块时间 </td>
-                  <td>{timestampToTime(data.timeSpanSec)}</td>
+                  <td>出块时间</td>
+                  <td>{dayjs(data.timeSpanSec).format('YYYY-MM-DD hh:mm:ss')}</td>
                 </tr>
                 <tr>
                   <td>上链节点</td>

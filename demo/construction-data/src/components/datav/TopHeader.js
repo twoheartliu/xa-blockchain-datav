@@ -11,6 +11,8 @@ export default props => {
     setValue(e.target.value)
     props.setValue(e.target.value)
   }
+
+  console.log(props.value)
   return (
     <div id="top-header">
       <Decoration8 className="header-left-decoration" />
@@ -18,16 +20,19 @@ export default props => {
       <Decoration8 className="header-right-decoration" reverse={true} />
       <div className="center-title">
         {props.settings.title}
-        <span>雄安区块链浏览器大屏</span>
+        <span>雄安区块链</span>
       </div>
-      <div className="select">
-        <label htmlFor="subject">选择项目</label>
-        <select name="subject" id="subject" value={value} onChange={selectOnchange}>
-          <option value="01">工程监理项目</option>
-          <option value="02">招采项目</option>
-          <option value="03">全域旅游项目</option>
-        </select>
-      </div>
+      {props.value ?
+        <div className="select">
+          <label htmlFor="subject">选择项目</label>
+          <select name="subject" id="subject" value={value} onChange={selectOnchange}>
+            <option value="01">工程监理项目</option>
+            <option value="02">招采项目</option>
+            <option value="03">全域旅游项目</option>
+          </select>
+        </div>
+        : null
+      }
     </div>
   )
 }
