@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 
 import { Decoration5, Decoration8 } from '@jiaminghi/data-view-react'
-import { Link } from 'react-router-dom'
+import { useParams, useHistory, Link } from 'react-router-dom'
 import './TopHeader.less'
 
 export default props => {
+  const { hash, project } = useParams()
   // const [value, setValue] = useState('01')
 
   const selectOnchange = e => {
@@ -21,7 +22,7 @@ export default props => {
         {/* <Link to="/hash/bidding/134640e54b7f4088aa4437d7bc70c78e">goto hash</Link> */}
         <span>雄安区块链</span>
       </div>
-      {props.value ? (
+      {project ? null : (
         <div className="select">
           <label htmlFor="subject">选择项目</label>
           <select name="subject" id="subject" value={props.value} onChange={selectOnchange}>
@@ -30,7 +31,7 @@ export default props => {
             <option value="03">全域旅游项目</option>
           </select>
         </div>
-      ) : null}
+      )}
     </div>
   )
 }

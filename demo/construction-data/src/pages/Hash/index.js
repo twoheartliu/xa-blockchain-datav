@@ -96,10 +96,9 @@ export default () => {
   }
 
   const backHome = () => {
-    console.log('home')
     history.push({
-      pathname: '/',
-      params: project
+      pathname: `/hash/${project}`,
+      params: project,
     })
   }
 
@@ -111,12 +110,10 @@ export default () => {
       mode: 'cors',
     })
       .then(res => {
-        console.log(res)
         return res.json()
       })
       .then(
         result => {
-          console.log(result)
           if (result.info) {
             setData(result.info)
           }

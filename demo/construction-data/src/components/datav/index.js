@@ -10,10 +10,10 @@ import Cards from './Cards'
 import TopRightCmp from './TopRightCmp'
 import quanpingImg from '../../assets/quanping.svg'
 import FullScrenn from '../../utils/fullScreen'
+import { useParams, useHistory, Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 
 import './index.less'
-
 
 const ScrollBoards = {
   header: ['出块时间', '数据索引', '区块高度', '数据哈希'],
@@ -25,49 +25,65 @@ const ScrollBoards = {
       '34717505f7c4c140e154df9ee0e2b45deae16f2b7240f3a93810452145add992',
     ],
     [
-      `${dayjs().subtract(1, 'day').format('YYYY-MM-DD')}`,
+      `${dayjs()
+        .subtract(1, 'day')
+        .format('YYYY-MM-DD')}`,
       '验证最高限价及公告',
       '430',
       '634de7a1e61f3de98e4b0ac99de929d45d38850baf95fe68d8eb05b92ec0937f',
     ],
     [
-      `${dayjs().subtract(2, 'day').format('YYYY-MM-DD')}`,
+      `${dayjs()
+        .subtract(2, 'day')
+        .format('YYYY-MM-DD')}`,
       '后审变更公告',
       '425',
       '63d7e8de7f8b073749e67336faf56474064377bb50cb208199f249ee8b584eb7',
     ],
     [
-      `${dayjs().subtract(3, 'day').format('YYYY-MM-DD')}`,
+      `${dayjs()
+        .subtract(3, 'day')
+        .format('YYYY-MM-DD')}`,
       '政府采购',
       '418',
       '4dfc4764d7b7dbeced6d5847861f126d38e35aef338a07e9bba3d6cc59b9f391',
     ],
     [
-      `${dayjs().subtract(4, 'day').format('YYYY-MM-DD')}`,
+      `${dayjs()
+        .subtract(4, 'day')
+        .format('YYYY-MM-DD')}`,
       '公告名称',
       '409',
       '34717505f7c4c140e154df9ee0e2b45deae16f2b7240f3a93810452145add992',
     ],
     [
-      `${dayjs().subtract(5, 'day').format('YYYY-MM-DD')}`,
+      `${dayjs()
+        .subtract(5, 'day')
+        .format('YYYY-MM-DD')}`,
       '验证最高限价及公告',
       '401',
       '634de7a1e61f3de98e4b0ac99de929d45d38850baf95fe68d8eb05b92ec0937f',
     ],
     [
-      `${dayjs().subtract(6, 'day').format('YYYY-MM-DD')}`,
+      `${dayjs()
+        .subtract(6, 'day')
+        .format('YYYY-MM-DD')}`,
       '后审变更公告',
       '389',
       '63d7e8de7f8b073749e67336faf56474064377bb50cb208199f249ee8b584eb7',
     ],
     [
-      `${dayjs().subtract(7, 'day').format('YYYY-MM-DD')}`,
+      `${dayjs()
+        .subtract(7, 'day')
+        .format('YYYY-MM-DD')}`,
       '政府采购',
       '377',
       '4dfc4764d7b7dbeced6d5847861f126d38e35aef338a07e9bba3d6cc59b9f391',
     ],
     [
-      `${dayjs().subtract(8, 'day').format('YYYY-MM-DD')}`,
+      `${dayjs()
+        .subtract(8, 'day')
+        .format('YYYY-MM-DD')}`,
       '后审变更公告',
       '365',
       '4dfc4764d7b7dbeced6d5847861f126d38e35aef338a07e9bba3d6cc59b9f391',
@@ -96,8 +112,9 @@ const RankingBoards = {
     ['2020-08-27', '公共记账节点1', '0.001'],
   ],
 }
-export default (props) => {
+export default props => {
   const [value, setValue] = useState('01')
+  const { hash, project } = useParams()
   const [full, setFull] = useState(false)
   const [settings, setSettings] = useState({
     TopHeader: {},
@@ -114,23 +131,22 @@ export default (props) => {
     },
     RankingBoard: {
       header: [],
-      data: []
-    }
+      data: [],
+    },
   })
 
   useEffect(() => {
-    console.log(props.location)
-    const {params} = props.location;
-    if (params === 'bidding') {
+    const { params } = props.location
+    if (params === 'bidding' || project === 'bidding') {
       setValue('01')
-    } else if (params === 'supervise') {
+    } else if (params === 'supervise' || project === 'supervise') {
       setValue('02')
-    } else if ( params === 'travel') {
+    } else if (params === 'travel' || project === 'travel') {
       setValue('03')
     } else {
-      setValue('01');
+      setValue('01')
     }
-  },[])
+  }, [])
 
   useEffect(() => {
     switch (value) {
@@ -147,7 +163,7 @@ export default (props) => {
             codeNum: 1,
           },
           ScrollBoard: ScrollBoards,
-          RankingBoard: RankingBoards
+          RankingBoard: RankingBoards,
         })
         break
       case '02':
@@ -163,7 +179,7 @@ export default (props) => {
             codeNum: 1,
           },
           ScrollBoard: ScrollBoards,
-          RankingBoard: RankingBoards
+          RankingBoard: RankingBoards,
         })
         break
       case '03':
@@ -179,7 +195,7 @@ export default (props) => {
             codeNum: 1,
           },
           ScrollBoard: ScrollBoards,
-          RankingBoard: RankingBoards
+          RankingBoard: RankingBoards,
         })
         break
       default:

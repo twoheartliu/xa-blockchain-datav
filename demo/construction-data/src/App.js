@@ -15,6 +15,7 @@ function App() {
             renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/hash/:project/:hash" component={Hash} />
+            <Route path="/hash/:project/" component={DataV} />
             <Route path="/" exact component={DataV} />
             <Route path="*">
               <Redirect to={'/'} />
