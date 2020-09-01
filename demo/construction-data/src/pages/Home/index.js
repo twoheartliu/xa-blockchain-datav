@@ -2,7 +2,8 @@ import React from 'react'
 import DataV from '../../components/datav'
 import './index.less'
 
-export default () => {
+export default (props) => {
+  console.log(props)
   // const [value, setValue] = useState('01')
 
   // const selectOnchange = e => {

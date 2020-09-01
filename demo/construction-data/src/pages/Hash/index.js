@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FullScreenContainer, BorderBox13, BorderBox2 } from '@jiaminghi/data-view-react'
 import '../../components/datav/index.less'
 import './index.less'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useHistory, Link } from 'react-router-dom'
 import TopHeader from '../../components/datav/TopHeader'
 import DigitalFlop from '../../components/datav/DigitalFlop'
 import qs from 'qs'
@@ -39,7 +39,7 @@ export default () => {
   let history = useHistory()
   useEffect(() => {
     switch (project) {
-      case 'supervision':
+      case 'supervise':
         setSettings({
           TopHeader: {
             title: '工程监理项目',
@@ -97,7 +97,10 @@ export default () => {
 
   const backHome = () => {
     console.log('home')
-    history.push('/')
+    history.push({
+      pathname: '/',
+      params: project
+    })
   }
 
   useEffect(() => {
@@ -134,6 +137,10 @@ export default () => {
         <BorderBox13>
           <BorderBox2 style={style2} className="backButton">
             <span onClick={backHome}>返回首页</span>
+            {/*<Link to={{*/}
+            {/*  pathname: '/',*/}
+            {/*  state: {project}*/}
+            {/*}}>返回首页</Link>*/}
           </BorderBox2>
           <header>区块详情</header>
           <content>
@@ -141,7 +148,7 @@ export default () => {
               <tbody>
                 <tr>
                   <td>出块时间</td>
-                  <td>{dayjs(data.timeSpanSec).format('YYYY-MM-DD hh:mm:ss')}</td>
+                  <td>{dayjs.unix(data.timeSpanSec).format('YYYY-MM-DD hh:mm:ss')}</td>
                 </tr>
                 <tr>
                   <td>上链节点</td>

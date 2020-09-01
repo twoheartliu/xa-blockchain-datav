@@ -16,7 +16,7 @@ import './index.less'
 
 
 const ScrollBoards = {
-  header: ['出块时间', '数据索引', '区块高度', '区块哈希'],
+  header: ['出块时间', '数据索引', '区块高度', '数据哈希'],
   data: [
     [
       `${dayjs().format('YYYY-MM-DD')}`,
@@ -96,7 +96,7 @@ const RankingBoards = {
     ['2020-08-27', '公共记账节点1', '0.001'],
   ],
 }
-export default () => {
+export default (props) => {
   const [value, setValue] = useState('01')
   const [full, setFull] = useState(false)
   const [settings, setSettings] = useState({
@@ -118,18 +118,31 @@ export default () => {
     }
   })
 
+  useEffect(() => {
+    console.log(props.location)
+    const {params} = props.location;
+    if (params === 'bidding') {
+      setValue('01')
+    } else if (params === 'supervise') {
+      setValue('02')
+    } else if ( params === 'travel') {
+      setValue('03')
+    } else {
+      setValue('01');
+    }
+  },[])
 
   useEffect(() => {
     switch (value) {
       case '01':
         setSettings({
           TopHeader: {
-            title: '工程监理项目',
+            title: '招采项目',
           },
           DigitalFlop: {
             time: `${dayjs().format('YYYY-MM-DD')}`,
-            blockNum: 82124,
-            tradeNum: 217556,
+            blockNum: 77,
+            tradeNum: 111,
             nodes: 3,
             codeNum: 1,
           },
@@ -140,12 +153,12 @@ export default () => {
       case '02':
         setSettings({
           TopHeader: {
-            title: '招采项目',
+            title: '工程监理项目',
           },
           DigitalFlop: {
             time: `${dayjs().format('YYYY-MM-DD')}`,
-            blockNum: 77,
-            tradeNum: 111,
+            blockNum: 82124,
+            tradeNum: 217556,
             nodes: 3,
             codeNum: 1,
           },
