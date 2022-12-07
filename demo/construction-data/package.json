@@ -39,7 +39,7 @@
     "http-proxy-middleware": "^1.0.5",
     "lint-staged": "^9.2.5",
     "prettier": "^1.18.2",
-    "qs": "^6.9.4"
+    "qs": "^6.9.7"
   },
   "husky": {
     "hooks": {
